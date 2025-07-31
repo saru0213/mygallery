@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Upload, ArrowLeft, Calendar, HardDrive, FileType, X, FolderOpen, Image, Trash2, CheckCircle, AlertTriangle } from 'lucide-react';
+; // Loads .env variables into process.env
 
 function ImageGalleryApp() {
     const [imageList, setImageList] = useState([]);
@@ -11,7 +12,9 @@ function ImageGalleryApp() {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [uploadAlert, setUploadAlert] = useState(null);
-    const backendUrl = import.meta.env.BACKEND_URL;
+   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASEURL 
+
+
 
     // Valid image types
     const validImageTypes = [
@@ -27,7 +30,7 @@ function ImageGalleryApp() {
     const fetchImages = async () => {
         try {
             setLoading(true);
-            const url = `${backendUrl}/api/images`;
+            const url = `${API_BASE_URL}/api/images`;
             const result = await fetch(url);
             const { data } = await result.json();
             setImageList(data || []);
@@ -44,7 +47,7 @@ function ImageGalleryApp() {
             setDetailLoading(true);
             setError(null);
             
-            const url = `${backendUrl}/api/images/${id}`;
+            const url = `${API_BASE_URL}/api/images/${id}`;
             const result = await fetch(url);
             
             if (!result.ok) {
@@ -120,7 +123,7 @@ function ImageGalleryApp() {
                 method: 'POST',
                 body: formData
             };
-            const url = `${backendUrl}/api/images/upload-images`;
+            const url = `${API_BASE_URL}/api/images/upload-images`;
             const result = await fetch(url, options);
             console.log(result)
             await fetchImages();
@@ -169,7 +172,7 @@ function ImageGalleryApp() {
             setDeleteLoading(true);
             setError(null);
             
-            const url = `${backendUrl}/api/images/${imageId}`;
+            const url = `${API_BASE_URL}/api/images/${imageId}`;
             const result = await fetch(url, {
                 method: 'DELETE'
             });
