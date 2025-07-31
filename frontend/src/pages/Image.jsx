@@ -12,7 +12,7 @@ function ImageGalleryApp() {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [uploadAlert, setUploadAlert] = useState(null);
-   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASEURL 
+   const API_BASE_URL = import.meta.env.VITE_BACKEND_URL 
 
 
 
